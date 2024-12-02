@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harness-java-app
+  labels:
+    app: harness-java-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: harness-java-app
+  template:
+    metadata:
+      labels:
+        app: harness-java-app
+    spec:
+      containers:
+      - name: harness-java-app
+        image: <your-dockerhub-username>/harness-java-app:latest
+        ports:
+        - containerPort: 8080
