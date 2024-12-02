@@ -25,7 +25,7 @@ pipeline:
                   identifier: buildpush
                   spec:
                     connectorRef: account.harnessImage
-                    image: harness-java-app-rxl
+                    image: harness-java-app
                     shell: Bash
                     command: |-
                       mvn clean install
