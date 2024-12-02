@@ -30,8 +30,8 @@ pipeline:
                     command: |-
                       mvn clean install
                       mvn test
-                      docker build -t realfiction/harness-kava-app-rxl:latest .
-                      docker push ealfiction/harness-kava-app-rxl:latest
+                      docker build -t realfiction/harness-java-app:latest .
+                      docker push realfiction/harness-java-app:latest
           infrastructure:
             type: KubernetesDirect
             spec:
