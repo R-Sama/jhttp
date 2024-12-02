@@ -20,27 +20,25 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    command: echo hello world
-                  timeout: ""
                   type: Run
-              - step:
-                  identifier: dockerbuild
-                  name: docker_build
+                  name: buildpush
+                  identifier: buildpush
                   spec:
-                    caching: true
-                    connectorRef: <+input>
-                    repo: hello/world
-                    tags:
-                      - latest
-                  timeout: ""
-                  type: BuildAndPushDockerRegistry
-          platform:
-            arch: Amd64
-            os: Linux
-          runtime:
-            spec: {}
-            type: Cloud
+                    connectorRef: account.harnessImage
+                    image: harness-java-app-rxl
+                    shell: Bash
+                    command: |-
+                      mvn clean install
+                      mvn test
+                      docker build -t realfiction/harness-kava-app-rxl:latest .
+                      docker push ealfiction/harness-kava-app-rxl:latest
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: Minikube_Connector
+              namespace: harness-java-app
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
         type: CI
+        description: ""
