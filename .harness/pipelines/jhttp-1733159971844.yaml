@@ -20,6 +20,17 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: GitClone
+                  name: clone_jhttp
+                  identifier: clone_jhttp
+                  spec:
+                    connectorRef: Rich
+                    repoName: jhttp
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
+              - step:
                   type: Run
                   name: buildpush
                   identifier: buildpush
