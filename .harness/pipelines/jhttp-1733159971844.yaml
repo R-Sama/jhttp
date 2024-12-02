@@ -21,17 +21,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: GitClone
-                  name: clone_jhttp
-                  identifier: clone_jhttp
-                  spec:
-                    connectorRef: Rich
-                    repoName: jhttp
-                    build:
-                      type: branch
-                      spec:
-                        branch: main
-              - step:
                   type: Run
                   name: maven
                   identifier: buildpush
@@ -53,17 +42,15 @@ pipeline:
                     command: |-
                       docker build -t realfiction/harness-java-app:latest .
                       docker push realfiction/harness-java-app:latest
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: Minikube_Connector
-              namespace: harness-java-app
-              automountServiceAccountToken: true
-              nodeSelector: {}
-              os: Linux
           sharedPaths:
             - github
           buildIntelligence:
             enabled: false
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Docker
+            spec: {}
         type: CI
         description: ""
