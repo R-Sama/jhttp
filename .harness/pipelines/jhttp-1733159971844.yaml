@@ -32,7 +32,7 @@ pipeline:
                         branch: main
               - step:
                   type: Run
-                  name: buildpush
+                  name: maven
                   identifier: buildpush
                   spec:
                     connectorRef: realfiction
@@ -41,6 +41,24 @@ pipeline:
                     command: |-
                       mvn clean install
                       mvn test
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: realfiction
+                    repo: harness-java-app
+                    tags:
+                      - latest
+              - step:
+                  type: Run
+                  name: buildpushmaybe
+                  identifier: buildpushmaybe
+                  spec:
+                    connectorRef: realfiction
+                    image: harness-java-app
+                    shell: Powershell
+                    command: |-
                       docker build -t realfiction/harness-java-app:latest .
                       docker push realfiction/harness-java-app:latest
           infrastructure:
