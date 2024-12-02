@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_jhttp_1733159980115-push-trigger-input-set
+  identifier: Build_jhttp_1733159980115pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: RichLiuHarnessLab
+  pipeline:
+    identifier: Build_jhttp_1733159980115
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
