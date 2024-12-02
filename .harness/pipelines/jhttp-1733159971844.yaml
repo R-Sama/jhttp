@@ -24,7 +24,7 @@ pipeline:
                   name: buildpush
                   identifier: buildpush
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: realfiction
                     image: harness-java-app
                     shell: Bash
                     command: |-
