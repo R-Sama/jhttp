@@ -29,7 +29,7 @@ pipeline:
                     build:
                       type: branch
                       spec:
-                        branch: master
+                        branch: main
               - step:
                   type: Run
                   name: buildpush
