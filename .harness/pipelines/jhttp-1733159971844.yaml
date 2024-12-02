@@ -16,6 +16,7 @@ pipeline:
         spec:
           caching:
             enabled: true
+            paths: []
           cloneCodebase: true
           execution:
             steps:
@@ -42,22 +43,13 @@ pipeline:
                       mvn clean install
                       mvn test
               - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
-                  identifier: BuildAndPushDockerRegistry_1
-                  spec:
-                    connectorRef: realfiction
-                    repo: harness-java-app
-                    tags:
-                      - latest
-              - step:
                   type: Run
                   name: buildpushmaybe
                   identifier: buildpushmaybe
                   spec:
                     connectorRef: realfiction
                     image: harness-java-app
-                    shell: Powershell
+                    shell: Bash
                     command: |-
                       docker build -t realfiction/harness-java-app:latest .
                       docker push realfiction/harness-java-app:latest
@@ -69,5 +61,9 @@ pipeline:
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
+          sharedPaths:
+            - github
+          buildIntelligence:
+            enabled: false
         type: CI
         description: ""
