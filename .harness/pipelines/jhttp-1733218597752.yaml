@@ -11,35 +11,8 @@ pipeline:
         repoName: jhttp
   stages:
     - stage:
-        identifier: build
         name: build
-        spec:
-          caching:
-            enabled: true
-          cloneCodebase: true
-          execution:
-            steps:
-              - step:
-                  identifier: echo
-                  name: maven build
-                  spec:
-                    shell: Bash
-                    command: mvn clean package
-                  timeout: ""
-                  type: Run
-              - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
-                  identifier: BuildAndPushDockerRegistry_1
-                  spec:
-                    connectorRef: realfiction
-                    repo: realfiction/harness-java-app
-                    tags:
-                      - latest
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
-        type: CI
+        identifier: build
+        template:
+          templateRef: Deploy_Java
+          versionLabel: "0.1"
