@@ -23,7 +23,7 @@ pipeline:
                   identifier: echo
                   name: maven build
                   spec:
-                    shell: Powershell
+                    shell: Bash
                     command: mvn clean package
                   timeout: ""
                   type: Run
