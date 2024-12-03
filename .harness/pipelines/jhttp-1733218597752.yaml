@@ -24,19 +24,12 @@ pipeline:
                   name: maven build
                   spec:
                     shell: Bash
-                    command: mvn clean package
+                    command: |-
+                      mvn clean package
+                      docker build -t realfiction/harness-java-app:latest
+                      docker push realfiction/harness-java-app:latest
                   timeout: ""
                   type: Run
-              - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry
-                  identifier: BuildAndPushDockerRegistry_1
-                  spec:
-                    connectorRef: realfiction
-                    repo: harness-java-app
-                    tags:
-                      - latest
-                    caching: true
           platform:
             os: Linux
             arch: Amd64
