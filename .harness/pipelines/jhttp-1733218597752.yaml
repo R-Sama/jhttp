@@ -1,18 +1,13 @@
 pipeline:
-  identifier: Build_jhttp_1733218617887
   name: Build http try 2
-  orgIdentifier: default
+  identifier: Build_jhttp_1733218617887
+  template:
+    templateRef: BuildCI
+    versionLabel: "0.1"
+    templateInputs:
+      properties:
+        ci:
+          codebase:
+            build: <+input>
   projectIdentifier: RichLiuHarnessLab
-  properties:
-    ci:
-      codebase:
-        build: <+input>
-        connectorRef: Rich
-        repoName: jhttp
-  stages:
-    - stage:
-        name: build
-        identifier: build
-        template:
-          templateRef: Deploy_Java
-          versionLabel: "0.1"
+  orgIdentifier: default
