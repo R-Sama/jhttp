@@ -29,7 +29,7 @@ pipeline:
                   type: Run
               - step:
                   type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
+                  name: BuildAndPushDockerRegistry
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: realfiction
