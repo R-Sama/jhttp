@@ -1,0 +1,25 @@
+service:
+  name: harness-java-app-service2
+  identifier: harnessjavaappservice2
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: harnessmanifestss
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: Rich
+                  gitFetchType: Branch
+                  paths:
+                    - /manifests
+                  repoName: harnessmanifest
+                  branch: main
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+  gitOpsEnabled: false
+  orgIdentifier: default
+  projectIdentifier: RichLiuHarnessLab
