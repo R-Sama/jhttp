@@ -28,29 +28,27 @@ pipeline:
                     connectorRef: realfiction
                     image: harness-java-app
                     shell: Bash
-                    command: |-
-                      mvn clean install
-                      mvn test
+                    command: mvn clean package
               - step:
-                  type: Run
-                  name: buildpushmaybe
-                  identifier: buildpushmaybe
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry
+                  identifier: BuildAndPushDockerRegistry
                   spec:
                     connectorRef: realfiction
-                    image: harness-java-app
-                    shell: Bash
-                    command: |-
-                      docker build -t realfiction/harness-java-app:latest .
-                      docker push realfiction/harness-java-app:latest
+                    repo: realfiction/harness-java-app
+                    tags:
+                      - latest
           sharedPaths:
             - github
           buildIntelligence:
             enabled: false
-          platform:
-            os: Linux
-            arch: Arm64
-          runtime:
-            type: Docker
-            spec: {}
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: Minikube_Connector
+              namespace: harness-java-app
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
         type: CI
         description: ""
