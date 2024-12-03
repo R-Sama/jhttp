@@ -26,6 +26,7 @@ pipeline:
                     shell: Bash
                     command: |-
                       mvn clean package
+
                       docker build -t realfiction/harness-java-app:latest -f Dockerfile .
                       docker push realfiction/harness-java-app:latest
                   timeout: ""
